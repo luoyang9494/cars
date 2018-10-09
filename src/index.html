@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <ul class="bigbox">
+            <!-- <li>
+                <h3>A</h3>
+                <ol>
+                    <li>1</li>
+                    <li>1</li>
+                    <li>1</li>
+                    <li>1</li>
+                    <li>1</li>
+                    <li>1</li>
+                    <li>1</li>
+                    <li>1</li>
+                    <li>1</li>
+
+                </ol>
+            </li> -->
+
+        </ul>
+
+    </div>
+    <div class="right">
+        <!-- <p>1</p>
+            <p>1</p> -->
+    </div>
+    <script src="js/better-scroll.js"></script>
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script>
+        var Bscroll = new BScroll('.wrapper');
+        $.ajax({
+            url: 'data/data.json',
+            success: function(res) {
+                if (res.code === 1) {
+                    render(res.data)
+                }
+            }
+        })
+
+        function render(data) {
+            var obj = {};
+            console.log(data);
+            data.forEach(function(item) {
+                var first = item.Spelling.substr(0, 1);
+                if (!obj[first]) {
+                    obj[first] = {
+                        title: first,
+                        list: []
+                    }
+                }
+                obj[first].list.push(item);
+            })
+            var arr = [];
+            for (var k in obj) {
+                arr.push(obj[k]);
+            }
+            var str = "";
+            var strRight = "";
+            arr.forEach(function(file) {
+                str += `<li>
+                        <h3>${file.title}</h3>
+                        <ol>`
+                strRight += `<p>${file.title}</p>`
+                file.list.forEach(function(v) {
+                    str += `<li>${v.Name}</li>`
+                })
+                str += `</ol></li>`
+            })
+            $(".bigbox").append(str);
+            $(".right").append(strRight);
+        }
+        $(".right").on('click', 'p', function() {
+            var index = $(this).index() + 1;
+            console.log(index);
+            Bscroll.scrollToElement($('.bigbox>li').eq(index)[0], 500);
+        })
+    </script>
+</body>
+
+</html>

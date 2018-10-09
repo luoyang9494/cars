@@ -1,0 +1,54 @@
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+.wrapper {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.bigbox {
+    width: 100%;
+    >li {
+        width: 100%;
+        h3 {
+            width: 100%;
+            height: 40px;
+            line-height: 40px;
+            background: #ccc;
+        }
+        ol {
+            width: 100%;
+            li {
+                width: 100%;
+                height: 40px;
+                line-height: 40px;
+            }
+        }
+    }
+}
+
+.right {
+    width: 50px;
+    text-align: center;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    z-index: 999;
+    border: 1px solid red;
+    p {
+        width: 100%;
+        height: 30px;
+        background: yellow;
+        line-height: 30px;
+    }
+}
